@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // >>>>>>> GLOBAL VARIABLES
 let voteCount = 25;
 
@@ -22,17 +23,18 @@ let resultsList = document.getElementById('results-list');
 
 
 // >>>>>>> CONSTRUCTOR FUNCTION
-function Products(name, fileExtension = 'jpg'){
+function Products(name, fileExtension = 'jpg') {
   this.name = name;
   this.views = 0;
   this.votes = 0;
   this.photo = `img/${name}.${fileExtension}`;
 
   state.allProductsArray.push(this);
-};
+}
 
-let bag = new Products ('bag');
-let banana = new Products('banana'); 
+// eslint-disable-next-line no-unused-vars
+let bag = new Products('bag');
+let banana = new Products('banana');
 let bathroom = new Products('bathroom');
 let boots = new Products('boots');
 let breakfast = new Products('breakfast');
@@ -43,9 +45,10 @@ let dog = new Products('dog-duck');
 let dragon = new Products('dragon');
 let pen = new Products('pen');
 let petsweep = new Products('pet-sweep');
+// eslint-disable-next-line no-unused-vars
 let scissors = new Products('scissors');
 let shark = new Products('shark');
-let sweep = new Products('sweep');
+let sweep = new Products('sweep', 'png');
 let tauntaun = new Products('tauntaun');
 let unicorn = new Products('unicorn');
 let water = new Products('water-can');
@@ -53,10 +56,32 @@ let wine = new Products('wine-glass');
 
 console.log(state.allProductsArray);
 
+function getRandomIndex() {
+  return Math.floor(Math.random() * state.allProductsArray.length);
+}
+// console.log(getRandomIndex());
+function renderImg() {
 
-// proof of life (console.log(allGoatsArray))
+  let indexOne = getRandomIndex();
+  let indexTwo = getRandomIndex();
+  let indexThree = getRandomIndex();
+
+  while (indexOne === indexTwo) {
+    indexOne = getRandomIndex();
+  }
+  while (indexTwo === indexThree) {
+    indexTwo === getRandomIndex();
+  }
+  while (indexThree === indexOne) {
+    indexThree === getRandomIndex();
+  }
 
 
+  imgOne.src = state.allProductsArray[indexOne].photo;
+  imgTwo.src = state.allProductsArray[indexTwo].photo;
+  imgThree.src = state.allProductsArray[indexThree].photo;
+}
+renderImg();
 
 
 // >>>>>>> HELPER FUNCTIONS
@@ -75,10 +100,10 @@ console.log(state.allProductsArray);
 
 
 
- // >>>>>>> EVENT HANDLERS
+// >>>>>>> EVENT HANDLERS
 
 
 
 
 
- // >>>>>>> LISTENERS
+// >>>>>>> LISTENERS
