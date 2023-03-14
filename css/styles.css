@@ -1,8 +1,8 @@
 body {
-  background-color: brown;
+  background-color: yellow;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 20px;
-  color: rgb(45, 2, 2);
+  color: blue;
   font-weight: 500;
 }
 
@@ -18,14 +18,14 @@ body {
 .header-section {
   grid-column: 2/8;
   background-color: ivory;
-  border: 5px solid rgb(45, 2, 2);
+  border: 5px solid yellow;
   border-radius: 5px;
 }
 
 h1 {
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 75px;
-  color: maroon;
+  color: blue;
   font-weight: 800;
 }
 
@@ -40,7 +40,7 @@ h1 {
   grid-column: 2/8;
   grid-row: 2/4;
   background-color: lavender;
-  border: 5px solid rgb(45, 2, 2);
+  border: 5px solid yellow;
   border-radius: 5px;
 }
 
@@ -52,7 +52,7 @@ h1 {
 }
 
 .img-container > img {
-  border: 5px solid rgb(45, 2, 2);
+  border: 5px solid yellow;
   border-radius: 5px;
   width: 25%;
   height: auto;
@@ -62,7 +62,7 @@ h1 {
     grid-column: 2/8;
     grid-row: 4/5;
     background-color: ivory;
-    border: 5px solid rgb(45, 2, 2);
+    border: 5px solid yellow;
     border-radius: 5px;
 }
 
@@ -78,19 +78,14 @@ button {
   font-size: 20px;
   background-color: azure;
   padding: 10px;
-  border: 2px solid rgb(45, 2, 2);
+  border: 2px solid blue;
   border-radius: 5px;
-  color: maroon;
+  color: blue;
   font-weight: 800;
   margin: 10px;
 }
 
-button:hover {
-  cursor: pointer;
-  background-color: brown;
-  color: azure;
-  box-shadow: 10px 5px 5px rgb(45, 2, 2);
-}
+
 
 ul {
   margin-bottom: 20px;
@@ -99,6 +94,6 @@ ul {
 li {
   padding: 5px;
   background-size: 20px;
-  list-style-type: circle;
-  /* list-style-image: url('../img/goat.png'); */
+ 
+  
 }
