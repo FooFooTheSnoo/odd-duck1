@@ -78,9 +78,55 @@ function renderImg() {
 
 
   imgOne.src = state.allProductsArray[indexOne].photo;
+  imgOne.alt = state.allProductsArray[indexOne].name;
+  console.log(state.allProductsArray[indexOne].views++);
+  console.log(imgOne);
+  state.allProductsArray[indexOne].views++;
+
   imgTwo.src = state.allProductsArray[indexTwo].photo;
+  imgTwo.alt = state.allProductsArray[indexTwo].name;
+  state.allProductsArray[indexTwo].views++;
+
   imgThree.src = state.allProductsArray[indexThree].photo;
+  imgThree.alt = state.allProductsArray[indexThree].name;
+  state.allProductsArray[indexThree].views++;
+
 }
+
+function handleClick(event) {
+  voteCount--;
+
+  let imgClick = event.target.alt;
+
+  for (let i = 0; i < state.allProductsArray.length; i++) {
+    if (imgClick === state.allProductsArray[i].name) {
+      state.allProductsArray.votes++;
+      console.log(imgClick);
+      console.log(imgClick, state.allProductsArray[i].votes);
+    }
+  }
+  renderImg();
+
+  if (voteCount === 0) {
+    imgContainer.removeEventListener('click', handleClick);
+  }
+  console.log(voteCount);
+}
+
+function handleShowResults() {
+  if (voteCount === 0) {
+    for (let i = 0; i < state.allProductsArray.length; i++) {
+      let liElem = document.createElement('li');
+      liElem.textContent = `${state.allProductsArray[i].name} was shown ${state.allProductsArray[i].views} and had ${state.allProductsArray.votes} votes`
+      resultsList.append(liElem);
+    }
+  }
+}
+
+
+imgContainer.addEventListener('click', handleClick);
+resultsButton.addEventListener('click', handleShowResults)
+
 renderImg();
 
 
@@ -99,11 +145,3 @@ renderImg();
 
 
 
-
-// >>>>>>> EVENT HANDLERS
-
-
-
-
-
-// >>>>>>> LISTENERS
