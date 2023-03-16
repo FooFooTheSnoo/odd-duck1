@@ -21,6 +21,8 @@ let imgThree = document.getElementById('img-three');
 let resultsButton = document.getElementById('results-button');
 let resultsList = document.getElementById('results-list');
 
+const ctx = document.getElementById('results-chart');
+
 
 // >>>>>>> CONSTRUCTOR FUNCTION
 function Products(name, fileExtension = 'jpg') {
@@ -93,6 +95,45 @@ function renderImg() {
 
 }
 
+function renderChart() {
+
+  let productNames = [];
+
+  let productVotes = [];
+
+  for (let i = 0; i < state.allProductsArray.length; i++) {
+    productNames.push(state.allProductsArray[i].name);
+    productVotes.push(state.allProductsArray[i].votes);
+  }
+  let resultsChart = {
+    type: 'bar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Votes',
+        data: productVotes,
+        borderWidth: 1,
+        color: [
+          'red',    // color for data at index 0
+          'blue',   // color for data at index 1
+          'green',  // color for data at index 2
+          'black',  // color for data at index 3
+
+        ]
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+  new Chart(ctx, resultsChart);
+}
+
+
 function handleClick(event) {
   voteCount--;
 
@@ -121,6 +162,8 @@ function handleShowResults() {
       liElem.textContent = `${state.allProductsArray[i].name} was shown ${state.allProductsArray[i].views} times and had ${state.allProductsArray[i].votes} votes`;
       resultsList.appendChild(liElem);
     }
+    resultsButton.style.display = 'none';
+    renderChart();
   }
 }
 
@@ -131,17 +174,13 @@ resultsButton.addEventListener('click', handleShowResults);
 renderImg();
 
 
-// >>>>>>> HELPER FUNCTIONS
-// Randomly generate an index
-// W3 Resources: Math.floor(Math.random()*items.length)
 
 
 
 
 
 
-// Render function
-// target the attribute of that img element to add the path
+
 
 
 
