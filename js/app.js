@@ -1,18 +1,10 @@
-/* eslint-disable no-unused-vars */
-// >>>>>>> GLOBAL VARIABLES
+
 let voteCount = 25;
-
-
-
-
-// single source of truth
-// for data that can change with our application state
+let previousIndexes = [];
 
 let state = {
   allProductsArray: [],
 };
-
-// DOM referenceces
 
 let imgContainer = document.getElementById('products');
 let imgOne = document.getElementById('img-one');
@@ -23,8 +15,6 @@ let resultsList = document.getElementById('results-list');
 
 const ctx = document.getElementById('results-chart');
 
-
-// >>>>>>> CONSTRUCTOR FUNCTION
 function Products(name, fileExtension = 'jpg') {
   this.name = name;
   this.views = 0;
@@ -34,71 +24,62 @@ function Products(name, fileExtension = 'jpg') {
   state.allProductsArray.push(this);
 }
 
-// eslint-disable-next-line no-unused-vars
-let bag = new Products('bag');
-let banana = new Products('banana');
-let bathroom = new Products('bathroom');
-let boots = new Products('boots');
-let breakfast = new Products('breakfast');
-let bubblegum = new Products('bubblegum');
-let chair = new Products('chair');
-let cthulhu = new Products('cthulhu');
-let dog = new Products('dog-duck');
-let dragon = new Products('dragon');
-let pen = new Products('pen');
-let petsweep = new Products('pet-sweep');
-// eslint-disable-next-line no-unused-vars
-let scissors = new Products('scissors');
-let shark = new Products('shark');
-let sweep = new Products('sweep', 'png');
-let tauntaun = new Products('tauntaun');
-let unicorn = new Products('unicorn');
-let water = new Products('water-can');
-let wine = new Products('wine-glass');
+
+new Products('bag');
+new Products('banana');
+new Products('bathroom');
+new Products('boots');
+new Products('breakfast');
+new Products('bubblegum');
+new Products('chair');
+new Products('cthulhu');
+new Products('dog-duck');
+new Products('dragon');
+new Products('pen');
+new Products('pet-sweep');
+new Products('scissors');
+new Products('shark');
+new Products('sweep', 'png');
+new Products('tauntaun');
+new Products('unicorn');
+new Products('water-can');
+new Products('wine-glass');
 
 console.log(state.allProductsArray);
-
-function getRandomIndex() {
-  return Math.floor(Math.random() * state.allProductsArray.length);
+function getUniqueIndex() {
+  const indexes = new Set();
+  while (indexes.size < 3) {
+    const randomIndex = Math.floor(Math.random() * state.allProductsArray.length);
+    if (!indexes.has(randomIndex) && !previousIndexes.includes(randomIndex)) {
+      indexes.add(randomIndex);
+    }
+  }
+  const uniqueIndexes = Array.from(indexes);
+  previousIndexes = uniqueIndexes;
+  return uniqueIndexes;
 }
-// console.log(getRandomIndex());
+
 function renderImg() {
 
-  let indexOne = getRandomIndex();
-  let indexTwo = getRandomIndex();
-  let indexThree = getRandomIndex();
+  let indices = getUniqueIndex();
 
-  while (indexOne === indexTwo) {
-    indexOne = getRandomIndex();
-  }
-  while (indexTwo === indexThree) {
-    indexTwo = getRandomIndex();
-  }
-  while (indexThree === indexOne) {
-    indexThree = getRandomIndex();
-  }
+  imgOne.src = state.allProductsArray[indices[0]].photo;
+  imgOne.alt = state.allProductsArray[indices[0]].name;
+  state.allProductsArray[indices[0]].views++;
 
+  imgTwo.src = state.allProductsArray[indices[1]].photo;
+  imgTwo.alt = state.allProductsArray[indices[1]].name;
+  state.allProductsArray[indices[1]].views++;
 
-  imgOne.src = state.allProductsArray[indexOne].photo;
-  imgOne.alt = state.allProductsArray[indexOne].name;
-  console.log(state.allProductsArray[indexOne].views++);
-  console.log(imgOne);
-  state.allProductsArray[indexOne].views++;
-
-  imgTwo.src = state.allProductsArray[indexTwo].photo;
-  imgTwo.alt = state.allProductsArray[indexTwo].name;
-  state.allProductsArray[indexTwo].views++;
-
-  imgThree.src = state.allProductsArray[indexThree].photo;
-  imgThree.alt = state.allProductsArray[indexThree].name;
-  state.allProductsArray[indexThree].views++;
+  imgThree.src = state.allProductsArray[indices[2]].photo;
+  imgThree.alt = state.allProductsArray[indices[2]].name;
+  state.allProductsArray[indices[2]].views++;
 
 }
 
 function renderChart() {
 
   let productNames = [];
-
   let productVotes = [];
 
   for (let i = 0; i < state.allProductsArray.length; i++) {
@@ -130,6 +111,7 @@ function renderChart() {
       }
     }
   };
+  // eslint-disable-next-line no-undef
   new Chart(ctx, resultsChart);
 }
 
@@ -152,7 +134,10 @@ function handleClick(event) {
   if (voteCount === 0) {
     imgContainer.removeEventListener('click', handleClick);
   }
-  console.log(voteCount);
+
+}
+for(let  i = 0; i < 10; i++) {
+  console.log(getUniqueIndex());
 }
 
 function handleShowResults() {
