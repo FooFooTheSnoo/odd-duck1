@@ -24,26 +24,35 @@ function Products(name, fileExtension = 'jpg') {
   state.allProductsArray.push(this);
 }
 
+let retrievedProducts = localStorage.getItem('products');
+let parsedProducts = JSON.parse(retrievedProducts);
 
-new Products('bag');
-new Products('banana');
-new Products('bathroom');
-new Products('boots');
-new Products('breakfast');
-new Products('bubblegum');
-new Products('chair');
-new Products('cthulhu');
-new Products('dog-duck');
-new Products('dragon');
-new Products('pen');
-new Products('pet-sweep');
-new Products('scissors');
-new Products('shark');
-new Products('sweep', 'png');
-new Products('tauntaun');
-new Products('unicorn');
-new Products('water-can');
-new Products('wine-glass');
+if (retrievedProducts){
+  state.allProductsArray =parsedProducts;
+} else {
+
+  new Products('bag');
+  new Products('banana');
+  new Products('bathroom');
+  new Products('boots');
+  new Products('breakfast');
+  new Products('bubblegum');
+  new Products('chair');
+  new Products('cthulhu');
+  new Products('dog-duck');
+  new Products('dragon');
+  new Products('pen');
+  new Products('pet-sweep');
+  new Products('scissors');
+  new Products('shark');
+  new Products('sweep', 'png');
+  new Products('tauntaun');
+  new Products('unicorn');
+  new Products('water-can');
+  new Products('wine-glass');
+}
+
+
 
 console.log(state.allProductsArray);
 function getUniqueIndex() {
@@ -133,6 +142,10 @@ function handleClick(event) {
 
   if (voteCount === 0) {
     imgContainer.removeEventListener('click', handleClick);
+
+    let stringifiedProducts = JSON.stringify(state.allProductsArray);
+
+    localStorage.setItem('products', stringifiedProducts);
   }
 
 }
